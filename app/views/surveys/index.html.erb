@@ -1,0 +1,17 @@
+<h1>Surveys</h1>
+<p><%= link_to "New survey", new_survey_path %></p>
+
+<% if @surveys.any? %>
+  <ul>
+    <% @surveys.each do |survey| %>
+      <li>
+        <%= link_to survey.title, survey_path(survey) %>
+        <span class="muted">
+          (<%= pluralize(survey.responses.count, "response") %>, average <%= survey.average_score %>)
+        </span>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="muted">No surveys yet.</p>
+<% end %>

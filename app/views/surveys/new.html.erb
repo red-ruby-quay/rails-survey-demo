@@ -1,0 +1,26 @@
+<h1>New survey</h1>
+
+<%= form_with model: @survey do |form| %>
+  <% if @survey.errors.any? %>
+    <div class="errors">
+      <p><strong><%= pluralize(@survey.errors.count, "error") %> prevented this survey from being saved:</strong></p>
+      <ul>
+        <% @survey.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, rows: 4 %>
+  </div>
+
+  <%= form.submit "Create Survey" %>
+<% end %>

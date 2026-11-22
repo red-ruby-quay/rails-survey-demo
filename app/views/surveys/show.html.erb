@@ -1,0 +1,63 @@
+<h1><%= @survey.title %></h1>
+<p class="muted"><%= @survey.description %></p>
+<p>
+  <strong><%= @survey.responses.count %></strong> responses
+  · average score <strong><%= @survey.average_score %></strong>
+</p>
+
+<h2>Add a response</h2>
+
+<%= form_with model: [@survey, @response] do |form| %>
+  <% if @response.errors.any? %>
+    <div class="errors">
+      <p><strong><%= pluralize(@response.errors.count, "error") %> prevented this response from being saved:</strong></p>
+      <ul>
+        <% @response.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :respondent_name %>
+    <%= form.text_field :respondent_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :score, "Score (1-5)" %>
+    <%= form.number_field :score, min: 1, max: 5 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comment %>
+    <%= form.text_area :comment, rows: 3 %>
+  </div>
+
+  <%= form.submit "Submit Response" %>
+<% end %>
+
+<h2>Responses</h2>
+
+<% if @survey.responses.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Respondent</th>
+        <th>Score</th>
+        <th>Comment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @survey.responses.order(created_at: :desc).each do |response| %>
+        <tr>
+          <td><%= response.respondent_name %></td>
+          <td><%= response.score %></td>
+          <td><%= response.comment %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="muted">No responses yet.</p>
+<% end %>

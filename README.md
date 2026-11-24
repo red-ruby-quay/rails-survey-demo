@@ -1,5 +1,7 @@
 # Rails Survey Demo + RSpec
 
+[![RSpec](https://github.com/red-ruby-quay/rails-survey-demo/actions/workflows/rspec.yml/badge.svg)](https://github.com/red-ruby-quay/rails-survey-demo/actions/workflows/rspec.yml)
+
 A small Rails 7.1 application used as a learning project for real-case RSpec/Capybara testing. Users can create surveys and submit responses with a score from 1 to 5.
 
 ## What this repo demonstrates
